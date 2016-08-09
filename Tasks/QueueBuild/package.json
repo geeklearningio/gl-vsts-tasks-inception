@@ -6,6 +6,6 @@
     "fs-extra": "0.30.0",
     "micromatch": "2.3.11",
     "vsts-task-lib": "0.9.6",
-    "handlebars": "4.0.5"
+    "node-rest-client": "2.0.1"
   }
 }

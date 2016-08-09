@@ -22,52 +22,20 @@
     "instanceNameFormat": "Queues Build $(Build Name)",
     "inputs": [
         {
-            "name": "DataSourceDir",
-            "type": "filePath",
-            "label": "Data source directory",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
-        },
-        {
-            "name": "DataSourceFilters",
-            "type": "multiLine",
-            "label": "Data source files",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
-        },
-        {
-            "name": "VariablesFilters",
-            "type": "multiLine",
-            "label": "Target files",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
-        },
-        {
-            "name": "TemplatesDir",
-            "type": "filePath",
-            "label": "Data source directory",
+            "name": "BuildId",
+            "type": "string",
+            "label": "Build Id",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+            "helpMarkDown": ""
         },
         {
-            "name": "TemplatesFilters",
+            "name": "BuildParameters",
             "type": "multiLine",
-            "label": "Data source files",
+            "label": "Parameters to set when queueing the build",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
-        },
-        {
-            "name": "OutputDir",
-            "type": "filePath",
-            "label": "Output directory",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+            "helpMarkDown": ""
         }
     ],
     "execution": {
