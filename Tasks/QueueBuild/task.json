@@ -36,6 +36,14 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": ""
+        },
+        {
+            "name": "IgnoreWarnings",
+            "type": "boolean",
+            "label": "Ignore queue build warnings",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": ""
         }
     ],
     "execution": {

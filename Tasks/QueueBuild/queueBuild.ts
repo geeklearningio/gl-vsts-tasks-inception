@@ -7,18 +7,21 @@ var client = new restClient.Client();
 
 var varRegex = /\$\((.*?)\)/g;
 
-function expandVariable(str: string){
+function expandVariable(str: string) {
     return str.replace(varRegex, (match, varName, offset, string) => tl.getVariable(varName));
 }
 
-var uri = tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI') +
-    tl.getVariable('SYSTEM_TEAMPROJECTID') +
-    '/_apis/build/builds?ignoreWarnings=true';
 
 var buildDefinitionId = parseInt(tl.getInput('BuildDefinitionId'));
 var buildParameters = expandVariable(tl.getInput('BuildParameters'));
+var ignoreWarnings = tl.getBoolInput('IgnoreWarnings');
 
 var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
+
+var uri = tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI') +
+    tl.getVariable('SYSTEM_TEAMPROJECTID') +
+    '/_apis/build/builds?ignoreWarnings=' + (ignoreWarnings ? 'true' : 'false');
+
 
 var req = client.post(uri, {
     data: {
@@ -31,7 +34,7 @@ var req = client.post(uri, {
     headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + tl.getVariable('SYSTEM_ACCESSTOKEN'),
-        "Accept" : "application/json;api-version=2.2"
+        "Accept": "application/json;api-version=2.0"
     }
 }, function (data, response) {
     // parsed response body as js object
