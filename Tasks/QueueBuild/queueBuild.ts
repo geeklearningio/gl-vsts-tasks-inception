@@ -13,7 +13,7 @@ function expandVariable(str: string){
 
 var uri = tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI') +
     tl.getVariable('SYSTEM_TEAMPROJECTID') +
-    '/_apis/build/builds?api-version=2.0&ignoreWarnings=true';
+    '/_apis/build/builds?ignoreWarnings=true';
 
 var buildId = parseInt(tl.getInput('BuildId'));
 var buildParameters = expandVariable(tl.getInput('BuildParameters'));
@@ -30,13 +30,14 @@ var req = client.post(uri, {
     },
     headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + tl.getVariable('SYSTEM_ACCESSTOKEN')
+        "Authorization": "Bearer " + tl.getVariable('SYSTEM_ACCESSTOKEN'),
+        "Accept" : "application/json;api-version=2.2"
     }
 }, function (data, response) {
     // parsed response body as js object
     console.log(data);
     // raw response
-    console.log(response);
+    //console.log(response);
     tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
 });
 
