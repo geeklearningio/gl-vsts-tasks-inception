@@ -1,0 +1,57 @@
+{
+    "manifestVersion": 1,
+    "id": "gl-vsts-tasks-inception",
+    "name": "Inception Build and Release Tasks",
+    "version": "0.0.18",
+    "publisher": "geeklearningio",    
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Queue builds from build with these Build and Release Tasks.",
+    "categories": [
+        "Build and release"
+    ],
+    "icons": {
+        "default": "extension-icon.png"        
+    },
+    "tags": [
+        "templating",
+        "template",
+        "hbs",
+        "inception"
+    ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        },
+        "license": {
+            "path": "LICENSE.txt"
+        }
+    },
+    "links": {
+        "getstarted": {
+            "uri": "https://github.com/geeklearningio/gl-vsts-tasks-inception/wiki"
+        },
+        "support": {
+            "uri": "https://github.com/geeklearningio/gl-vsts-tasks-inception/issues"
+        },
+        "repository": {
+            "uri": "https://github.com/geeklearningio/gl-vsts-tasks-inception"
+        },
+        "issues": {
+            "uri": "https://github.com/geeklearningio/gl-vsts-tasks-inception/issues"
+        }
+    },
+    "branding": {
+        "color": "#008B8B",
+        "theme": "dark"
+    },  
+    "files": [
+        {
+            "path": "Tasks"
+        }
+    ],
+    "contributions": []
+}

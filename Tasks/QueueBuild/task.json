@@ -1,0 +1,79 @@
+{
+    "id": "3CF2A290-9E53-4382-B065-AD6B4A31F6E9",
+    "name": "QueueBuild",
+    "friendlyName": "Queue a Build",
+    "description": "Queues a Build",
+    "helpMarkDown": "[More Information](https://github.com/geeklearningio/gl-vsts-tasks-inception/wiki/Queue-Build) (Version #{Version}#)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "author": "Geek Learning",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 41
+    },
+    "demands": [
+        "npm"
+    ],
+    "minimumAgentVersion": "1.91.0",
+    "instanceNameFormat": "Queues Build $(Build Name)",
+    "inputs": [
+        {
+            "name": "DataSourceDir",
+            "type": "filePath",
+            "label": "Data source directory",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+        },
+        {
+            "name": "DataSourceFilters",
+            "type": "multiLine",
+            "label": "Data source files",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+        },
+        {
+            "name": "VariablesFilters",
+            "type": "multiLine",
+            "label": "Target files",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+        },
+        {
+            "name": "TemplatesDir",
+            "type": "filePath",
+            "label": "Data source directory",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+        },
+        {
+            "name": "TemplatesFilters",
+            "type": "multiLine",
+            "label": "Data source files",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+        },
+        {
+            "name": "OutputDir",
+            "type": "filePath",
+            "label": "Output directory",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Patch target file. Example: $(agent.builddirectory)/target.json"
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "queueBuild.js",
+            "argumentFormat": ""
+        }
+    }
+}
