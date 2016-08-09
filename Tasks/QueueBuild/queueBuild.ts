@@ -25,7 +25,7 @@ var req = client.post(uri, {
         definition: {
             id: buildId
         },
-        parameters: JSON.stringify(buildParameters),
+        parameters: buildParameters,
         sourceBranch: sourceBranch
     },
     headers: {
