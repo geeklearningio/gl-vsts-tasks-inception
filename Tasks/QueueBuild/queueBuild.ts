@@ -15,7 +15,7 @@ var uri = tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI') +
     tl.getVariable('SYSTEM_TEAMPROJECTID') +
     '/_apis/build/builds?ignoreWarnings=true';
 
-var buildId = parseInt(tl.getInput('BuildId'));
+var buildDefinitionId = parseInt(tl.getInput('BuildDefinitionId'));
 var buildParameters = expandVariable(tl.getInput('BuildParameters'));
 
 var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
@@ -23,7 +23,7 @@ var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
 var req = client.post(uri, {
     data: {
         definition: {
-            id: buildId
+            id: buildDefinitionId
         },
         parameters: buildParameters,
         sourceBranch: sourceBranch

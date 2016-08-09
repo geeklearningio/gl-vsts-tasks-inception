@@ -22,9 +22,9 @@
     "instanceNameFormat": "Queues Build $(Build Name)",
     "inputs": [
         {
-            "name": "BuildId",
+            "name": "BuildDefinitionId",
             "type": "string",
-            "label": "Build Id",
+            "label": "Build Definition Id",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": ""
