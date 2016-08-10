@@ -35,7 +35,12 @@
             "label": "Parameters to set when queueing the build",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": ""
+            "helpMarkDown": "",
+            "properties": {
+                "resizable": "true",
+                "rows": "5",
+                "maxLength": "5000"
+            }
         },
         {
             "name": "IgnoreWarnings",
