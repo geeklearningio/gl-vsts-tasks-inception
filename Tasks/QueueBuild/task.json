@@ -19,7 +19,7 @@
         "npm"
     ],
     "minimumAgentVersion": "1.91.0",
-    "instanceNameFormat": "Queues Build $(Build Name)",
+    "instanceNameFormat": "Queues Build Definition : $(BuildDefinition)$(BuildDefinitionId)",
     "inputs": [
         {
             "name": "BuildDefinitionSelectionMode",
