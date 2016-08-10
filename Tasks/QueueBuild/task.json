@@ -29,8 +29,8 @@
             "required": true,
             "helpMarkDown": "",
             "options": {
-                "Id": "By Id",
-                "Name": "By Name"
+                "List" : "From List",
+                "Id": "By Id"
             }
         },
         {
@@ -43,16 +43,16 @@
             "visibleRule": "BuildDefinitionSelectionMode = Id"
         },
         {
-            "name": "BuildDefinitionName",
+            "name": "BuildDefinition",
             "type": "pickList",
-            "label": "Build Definition Name",
+            "label": "Build Definition",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "",
             "properties": {
-                "EditableOptions": "True"
+                "DisableManageLink": "True"
             },
-            "visibleRule": "BuildDefinitionSelectionMode = Name"
+            "visibleRule": "BuildDefinitionSelectionMode = List"
         },
         {
             "name": "BuildParameters",
@@ -74,6 +74,15 @@
             "defaultValue": "false",
             "required": false,
             "helpMarkDown": ""
+        }
+    ],
+    "sourceDefinitions": [
+        {
+            "target": "BuildDefinition",
+            "endpoint": "/$(system.teamProject)/_apis/build/definitions?api-version=2.0&type=build",
+            "selector": "jsonpath:$.value[*].name",
+            "keySelector": "jsonpath:$.value[*].id",
+            "authKey": "tfs:teamfoundation"
         }
     ],
     "execution": {

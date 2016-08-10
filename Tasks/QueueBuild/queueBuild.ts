@@ -13,17 +13,17 @@ function expandVariable(str: string) {
 }
 
 var systemAccessToken = vstsApi.getSystemAccessToken(); //tl.getVariable('SYSTEM_ACCESSTOKEN')
-var systemUrl = vstsApi.getSystemEndpoint();
+var systemUrl = vstsApi.getSystemEndpoint(); // tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI')
 
-tl.debug(systemUrl);
+tl.debug("gl : Selected Build Definition : " + tl.getInput('BuildDefinition'));
 
-var buildDefinitionId = parseInt(tl.getInput('BuildDefinitionId'));
+var buildDefinitionId = tl.getInput('BuildDefinitionSelectionMode') == "Id" ? parseInt(tl.getInput('BuildDefinitionId')) : parseInt(tl.getInput('BuildDefinition'));
 var buildParameters = expandVariable(tl.getInput('BuildParameters'));
 var ignoreWarnings = tl.getBoolInput('IgnoreWarnings');
 
 var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
 
-var uri = tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI') +
+var uri = systemUrl +
     tl.getVariable('SYSTEM_TEAMPROJECTID') +
     '/_apis/build/builds?ignoreWarnings=' + (ignoreWarnings ? 'true' : 'false');
 
