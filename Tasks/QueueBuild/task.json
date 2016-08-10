@@ -22,12 +22,37 @@
     "instanceNameFormat": "Queues Build $(Build Name)",
     "inputs": [
         {
+            "name": "BuildDefinitionSelectionMode",
+            "type": "radio",
+            "label": "Build Definition Selection Mode",
+            "defaultValue": "Id",
+            "required": true,
+            "helpMarkDown": "",
+            "options": {
+                "Id": "By Id",
+                "Name": "By Name"
+            }
+        },
+        {
             "name": "BuildDefinitionId",
             "type": "string",
             "label": "Build Definition Id",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": ""
+            "helpMarkDown": "",
+            "visibleRule": "BuildDefinitionSelectionMode = Id"
+        },
+        {
+            "name": "BuildDefinitionName",
+            "type": "pickList",
+            "label": "Build Definition Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "",
+            "properties": {
+                "EditableOptions": "True"
+            },
+            "visibleRule": "BuildDefinitionSelectionMode = Name"
         },
         {
             "name": "BuildParameters",

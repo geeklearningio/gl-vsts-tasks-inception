@@ -2,6 +2,7 @@ import path = require('path');
 import fs = require('fs-extra');
 import tl = require('vsts-task-lib/task');
 import restClient = require('node-rest-client');
+import vstsApi = require('./common/vstsApi');
 
 var client = new restClient.Client();
 
@@ -11,6 +12,10 @@ function expandVariable(str: string) {
     return str.replace(varRegex, (match, varName, offset, string) => tl.getVariable(varName));
 }
 
+var systemAccessToken = vstsApi.getSystemAccessToken(); //tl.getVariable('SYSTEM_ACCESSTOKEN')
+var systemUrl = vstsApi.getSystemEndpoint();
+
+tl.debug(systemUrl);
 
 var buildDefinitionId = parseInt(tl.getInput('BuildDefinitionId'));
 var buildParameters = expandVariable(tl.getInput('BuildParameters'));
@@ -33,7 +38,7 @@ var req = client.post(uri, {
     },
     headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + tl.getVariable('SYSTEM_ACCESSTOKEN'),
+        "Authorization": "Bearer " + systemAccessToken,
         "Accept": "application/json;api-version=2.0"
     }
 }, function (data, response) {
