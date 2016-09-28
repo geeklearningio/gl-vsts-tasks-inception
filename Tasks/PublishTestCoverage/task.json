@@ -1,0 +1,34 @@
+{
+    "id": "f3a93336-918d-4ea0-ae6b-cce5a68e1894",
+    "name": "PublishTestCoverage",
+    "friendlyName": "Publish Test Coverage",
+    "description": "Publish Test Coverage",
+    "helpMarkDown": "[More Information](https://github.com/geeklearningio/gl-vsts-tasks-inception/wiki/Publish-Test-Coverae) (Version #{Version}#)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "author": "Geek Learning",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 41
+    },
+    "demands": [
+        "npm"
+    ],
+    "minimumAgentVersion": "1.91.0",
+    "instanceNameFormat": "Queues Build Definition : $(BuildDefinition)$(BuildDefinitionId)",
+    "inputs": [
+    ],
+    "sourceDefinitions": [
+       
+    ],
+    "execution": {
+        "Node": {
+            "target": "publishTestConverage.js",
+            "argumentFormat": ""
+        }
+    }
+}
