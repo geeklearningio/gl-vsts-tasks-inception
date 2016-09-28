@@ -8,6 +8,9 @@ import XRegExp = require('xregexp');
 var client = new restClient.Client();
 
 var varRegex = /\$\((.*?)\)/g;
+var currentBuild = tl.getVariable('System.DefinitionId');
+
+tl.debug('Current Build Id : ' + currentBuild.toString());
 
 function expandVariable(str: string) {
     return str.replace(varRegex, (match, varName, offset, string) => tl.getVariable(varName));
@@ -34,33 +37,38 @@ var ignoreWarnings = tl.getBoolInput('IgnoreWarnings');
 
 var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
 
-var uri = systemUrl +
-    tl.getVariable('SYSTEM_TEAMPROJECTID') +
-    '/_apis/build/builds?ignoreWarnings=' + (ignoreWarnings ? 'true' : 'false');
+if (parseInt(currentBuild) == buildDefinitionId) {
+    tl.setResult(tl.TaskResult.Failed, 'Auto queuing a build is disabled');
+} else {
+    var uri = systemUrl +
+        tl.getVariable('SYSTEM_TEAMPROJECTID') +
+        '/_apis/build/builds?ignoreWarnings=' + (ignoreWarnings ? 'true' : 'false');
 
 
-var req = client.post(uri, {
-    data: {
-        definition: {
-            id: buildDefinitionId
+    var req = client.post(uri, {
+        data: {
+            definition: {
+                id: buildDefinitionId
+            },
+            parameters: buildParameters,
+            sourceBranch: sourceBranch
         },
-        parameters: buildParameters,
-        sourceBranch: sourceBranch
-    },
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + systemAccessToken,
-        "Accept": "application/json;api-version=2.0"
-    }
-}, function (data, response) {
-    // parsed response body as js object
-    console.log(data);
-    // raw response
-    //console.log(response);
-    tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
-});
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + systemAccessToken,
+            "Accept": "application/json;api-version=2.0"
+        }
+    }, function (data, response) {
+        // parsed response body as js object
+        console.log(data);
+        // raw response
+        //console.log(response);
+        tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
+    });
 
-req.on('error', function (err: any) {
-    console.log('request error', err);
-    tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build');
-});
+    req.on('error', function (err: any) {
+        console.log('request error', err);
+        tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build');
+    });
+}
+
