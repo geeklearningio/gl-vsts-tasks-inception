@@ -3,6 +3,7 @@ import fs = require('fs-extra');
 import tl = require('vsts-task-lib/task');
 import restClient = require('node-rest-client');
 import vstsApi = require('./common/vstsApi');
+import XRegExp = require('xregexp');
 
 var client = new restClient.Client();
 
@@ -12,13 +13,23 @@ function expandVariable(str: string) {
     return str.replace(varRegex, (match, varName, offset, string) => tl.getVariable(varName));
 }
 
+export function parseParameters(map: string): { [tag: string]: string } {
+    var result: { [tag: string]: string } = {};
+
+    XRegExp.forEach(map, XRegExp('^\\s*(?<key>.*?)\\s*=>\\s*"(?<val>.*?)"\\s*?$', 'gm'), (match) => {
+        result[(<any>match).key] = (<any>match).val;
+    });
+
+    return result;
+}
+
 var systemAccessToken = vstsApi.getSystemAccessToken(); //tl.getVariable('SYSTEM_ACCESSTOKEN')
 var systemUrl = vstsApi.getSystemEndpoint(); // tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI')
 
 tl.debug("gl : Selected Build Definition : " + tl.getInput('BuildDefinition'));
 
 var buildDefinitionId = tl.getInput('BuildDefinitionSelectionMode') == "Id" ? parseInt(tl.getInput('BuildDefinitionId')) : parseInt(tl.getInput('BuildDefinition'));
-var buildParameters = expandVariable(tl.getInput('BuildParameters'));
+var buildParameters = JSON.stringify(parseParameters(expandVariable(tl.getInput('BuildParameters'))));
 var ignoreWarnings = tl.getBoolInput('IgnoreWarnings');
 
 var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
