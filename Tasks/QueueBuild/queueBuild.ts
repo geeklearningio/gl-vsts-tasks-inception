@@ -76,7 +76,7 @@ if (parseInt(currentBuild) == buildDefinitionId) {
         var parsedData = JSON.parse(data);
 
         if (response.statusCode == 200) {
-            tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully : ' + parsedData._links.self.web.href);
+            tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully : ' + parsedData._links.web.href);
         } else {
             tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build with message : ' + parsedData.message);
         }
