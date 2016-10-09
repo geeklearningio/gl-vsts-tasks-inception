@@ -69,12 +69,17 @@ if (parseInt(currentBuild) == buildDefinitionId) {
         }
     }, function (data, response) {
         // parsed response body as js object
+        tl.debug(response.statusCode);
+        tl.debug(response.status);
+        tl.debug(response.code);
         tl.debug(data);
-        tl.debug(data.headers);
-        tl.debug(response.headers);
-        // raw response
-        //console.log(response);
-        tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
+        tl.debug(JSON.stringify(response.headers));
+
+        if (data.queueTime) {
+            tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
+        } else {
+            tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build with message : ' + data.message);
+        }
     });
 
     req.on('error', function (err: any) {
