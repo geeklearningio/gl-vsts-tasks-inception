@@ -73,10 +73,12 @@ if (parseInt(currentBuild) == buildDefinitionId) {
         tl.debug(data);
         tl.debug(JSON.stringify(response.headers));
 
+        var parsedData = JSON.parse(data);
+
         if (response.statusCode == 200) {
-            tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
+            tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully : ' + parsedData._links.self.web.href);
         } else {
-            tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build with message : ' + data.message);
+            tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build with message : ' + parsedData.message);
         }
     });
 
