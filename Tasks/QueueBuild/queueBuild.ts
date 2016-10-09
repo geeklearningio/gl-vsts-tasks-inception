@@ -70,12 +70,10 @@ if (parseInt(currentBuild) == buildDefinitionId) {
     }, function (data, response) {
         // parsed response body as js object
         tl.debug(response.statusCode);
-        tl.debug(response.status);
-        tl.debug(response.code);
         tl.debug(data);
         tl.debug(JSON.stringify(response.headers));
 
-        if (data.queueTime) {
+        if (response.statusCode == 200) {
             tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
         } else {
             tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build with message : ' + data.message);
