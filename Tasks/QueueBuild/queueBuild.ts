@@ -5,7 +5,16 @@ import restClient = require('node-rest-client');
 import vstsApi = require('./common/vstsApi');
 import XRegExp = require('xregexp');
 
-var client = new restClient.Client();
+var client = <restClient.Client>new (<any>restClient.Client)({
+    mimetypes: {
+        json: [
+            'application/json',
+            'application/json; charset=utf-8',
+            'application/json; charset=utf-8; api-version=2.0',
+            'application/json; charset=utf-8; api-version=3.0-preview.2'
+        ]
+    }
+});
 
 var varRegex = /\$\((.*?)\)/g;
 var currentBuild = tl.getVariable('System.DefinitionId');
@@ -60,7 +69,9 @@ if (parseInt(currentBuild) == buildDefinitionId) {
         }
     }, function (data, response) {
         // parsed response body as js object
-        console.log(data);
+        tl.debug(data);
+        tl.debug(data.headers);
+        tl.debug(response.headers);
         // raw response
         //console.log(response);
         tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully');
