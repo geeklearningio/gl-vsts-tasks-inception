@@ -53,6 +53,7 @@ if (parseInt(currentBuild) == buildDefinitionId) {
         tl.getVariable('SYSTEM_TEAMPROJECTID') +
         '/_apis/build/builds?ignoreWarnings=' + (ignoreWarnings ? 'true' : 'false');
 
+    tl.debug(buildParameters);
 
     var req = client.post(uri, {
         data: {
