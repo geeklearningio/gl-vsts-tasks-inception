@@ -57,6 +57,10 @@
     "files": [
         {
             "path": "Tasks"
+        },
+        {
+            "path": "Screenshots",
+            "addressable": true
         }
     ],
     "contributions": []
