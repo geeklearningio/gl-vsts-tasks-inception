@@ -28,7 +28,7 @@ function expandVariable(str: string) {
 export function parseParameters(map: string): { [tag: string]: string } {
     var result: { [tag: string]: string } = {};
 
-    XRegExp.forEach(map, XRegExp('^\\s*(?<key>.*?)\\s*=>\\s*"(?<val>.*?)"\\s*?$', 'gm'), (match) => {
+    XRegExp.forEach(map, XRegExp('^\\s*(?<key>.*?)\\s*=>\\s*"?(?<val>.*?)"?\\s*?$', 'gm'), (match) => {
         result[(<any>match).key] = (<any>match).val;
     });
 
