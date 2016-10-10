@@ -28,6 +28,14 @@
             "path": "LICENSE.txt"
         }
     },
+    "screenshots": [
+        {
+            "path": "Screenshots/Configure-QueueBuild.png"
+        },
+        {
+            "path": "Screenshots/Add-Tasks.png"
+        }
+    ],
     "links": {
         "getstarted": {
             "uri": "https://github.com/geeklearningio/gl-vsts-tasks-inception/wiki"
