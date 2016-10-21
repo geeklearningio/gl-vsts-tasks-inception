@@ -1,7 +1,7 @@
 import tl = require('vsts-task-lib/task');
 
 export function getSystemEndpoint(): string{
-    return tl.getEndpointUrl("SystemVssConnection", false);
+    return tl.getEndpointUrl("SYSTEMVSSCONNECTION", false);
 }
 
 export function getSystemAccessToken(): string {
