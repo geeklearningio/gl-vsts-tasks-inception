@@ -20,6 +20,13 @@
     ],
     "minimumAgentVersion": "1.91.0",
     "instanceNameFormat": "Queues Build Definition : $(BuildDefinition)$(BuildDefinitionId)",
+    "groups": [
+        {
+            "name": "advancedOptions",
+            "displayName": "Advanced Options",
+            "isExpanded": false
+        }
+    ],
     "inputs": [
         {
             "name": "BuildDefinitionSelectionMode",
@@ -29,7 +36,7 @@
             "required": true,
             "helpMarkDown": "",
             "options": {
-                "List" : "From List",
+                "List": "From List",
                 "Id": "By Id"
             }
         },
@@ -74,6 +81,15 @@
             "defaultValue": "false",
             "required": false,
             "helpMarkDown": ""
+        },
+        {
+            "name": "TargetSourceBranch",
+            "type": "string",
+            "label": "Source branch to build",
+            "defaultValue": "provide the target branch name. Same branch will be used if empty.",
+            "required": false,
+            "helpMarkDown": "",
+            "groupName": "advancedOptions"
         }
     ],
     "sourceDefinitions": [

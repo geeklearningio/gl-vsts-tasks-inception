@@ -46,6 +46,12 @@ var ignoreWarnings = tl.getBoolInput('IgnoreWarnings');
 
 var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
 
+var targetSourceBranch = tl.getInput('TargetSourceBranch');
+
+if (targetSourceBranch){
+    sourceBranch = targetSourceBranch;
+}
+
 if (parseInt(currentBuild) == buildDefinitionId) {
     tl.setResult(tl.TaskResult.Failed, 'Auto queuing a build is disabled');
 } else {
