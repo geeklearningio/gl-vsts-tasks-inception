@@ -17,3 +17,9 @@ After installing the extension, you can add one (or more) of the tasks to a new 
 ## Learn more
 
 The [source](https://github.com/geeklearningio/gl-vsts-tasks-inception) for this extension is on GitHub. Take, fork, and extend.
+
+## Release Notes
+
+> **23-10-2016**
+> - [QueueBuild] Add Source branch to build options #10 
+> - [QueueBuild] Fixed a casing issue when requiring VSSEXTENSION endpoint causing errors on some environement.

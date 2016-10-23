@@ -21,7 +21,9 @@ Visual Studio Team Services Build and Release Management extensions which allow 
 
 ## Release Notes
 
-*n/a*
+> **23-10-2016**
+> - [QueueBuild] Add Source branch to build options #10 
+> - [QueueBuild] Fixed a casing issue when requiring VSSEXTENSION endpoint causing errors on some environement.
 
 ## Contributors
 
