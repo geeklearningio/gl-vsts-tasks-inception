@@ -86,9 +86,9 @@
             "name": "TargetSourceBranch",
             "type": "string",
             "label": "Source branch to build",
-            "defaultValue": "provide the target branch name. Same branch will be used if empty.",
+            "defaultValue": "",
             "required": false,
-            "helpMarkDown": "",
+            "helpMarkDown": "Provide the target branch name. Same branch will be used if empty.",
             "groupName": "advancedOptions"
         }
     ],
