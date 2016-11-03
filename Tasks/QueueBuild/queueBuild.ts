@@ -19,7 +19,9 @@ var client = <restClient.Client>new (<any>restClient.Client)({
 var varRegex = /\$\((.*?)\)/g;
 var currentBuild = tl.getVariable('System.DefinitionId');
 
-tl.debug('Current Build Id : ' + currentBuild.toString());
+if (currentBuild){
+    tl.debug('Current Build Definition Id : ' + currentBuild.toString());
+}
 
 function expandVariable(str: string) {
     return str.replace(varRegex, (match, varName, offset, string) => tl.getVariable(varName));
@@ -52,7 +54,7 @@ if (targetSourceBranch){
     sourceBranch = targetSourceBranch;
 }
 
-if (parseInt(currentBuild) == buildDefinitionId) {
+if (currentBuild && (parseInt(currentBuild) == buildDefinitionId)) {
     tl.setResult(tl.TaskResult.Failed, 'Auto queuing a build is disabled');
 } else {
     var uri = systemUrl +
