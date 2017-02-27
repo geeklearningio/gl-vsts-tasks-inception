@@ -19,7 +19,7 @@ var client = <restClient.Client>new (<any>restClient.Client)({
 var varRegex = /\$\((.*?)\)/g;
 var currentBuild = tl.getVariable('System.DefinitionId');
 
-if (currentBuild){
+if (currentBuild) {
     tl.debug('Current Build Definition Id : ' + currentBuild.toString());
 }
 
@@ -40,6 +40,8 @@ export function parseParameters(map: string): { [tag: string]: string } {
 var systemAccessToken = vstsApi.getSystemAccessToken(); //tl.getVariable('SYSTEM_ACCESSTOKEN')
 var systemUrl = vstsApi.getSystemEndpoint(); // tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI')
 
+tl.debug("system Url : " + systemUrl);
+
 tl.debug("gl : Selected Build Definition : " + tl.getInput('BuildDefinition'));
 
 var buildDefinitionId = tl.getInput('BuildDefinitionSelectionMode') == "Id" ? parseInt(tl.getInput('BuildDefinitionId')) : parseInt(tl.getInput('BuildDefinition'));
@@ -50,7 +52,7 @@ var sourceBranch = tl.getVariable('BUILD_SOURCEBRANCH')
 
 var targetSourceBranch = tl.getInput('TargetSourceBranch');
 
-if (targetSourceBranch){
+if (targetSourceBranch) {
     sourceBranch = targetSourceBranch;
 }
 
@@ -77,17 +79,20 @@ if (currentBuild && (parseInt(currentBuild) == buildDefinitionId)) {
             "Accept": "application/json;api-version=2.0"
         }
     }, function (data, response) {
-        // parsed response body as js object
+
         tl.debug(response.statusCode);
         tl.debug(data);
-        tl.debug(JSON.stringify(response.headers));
 
-        var parsedData = JSON.parse(data);
-
-        if (response.statusCode == 200) {
-            tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully : ' + parsedData._links.web.href);
-        } else {
-            tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build with message : ' + parsedData.message);
+        try {
+            var parsedData = JSON.parse(data);
+            if (response.statusCode == 200) {
+                tl.setResult(tl.TaskResult.Succeeded, 'Build queued successfully : ' + parsedData._links.web.href);
+            } else {
+                tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build with message : ' + parsedData.message);
+            }
+        }
+        catch (err) {
+            tl.setResult(tl.TaskResult.Failed, 'Failed to queue the build : Cannot read parse response');
         }
     });
 
