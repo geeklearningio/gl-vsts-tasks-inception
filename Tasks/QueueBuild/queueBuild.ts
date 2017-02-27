@@ -41,6 +41,8 @@ var systemAccessToken = vstsApi.getSystemAccessToken(); //tl.getVariable('SYSTEM
 var systemUrl = vstsApi.getSystemEndpoint(); // tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI')
 
 tl.debug("system Url : " + systemUrl);
+tl.debug("SYSTEM_TEAMFOUNDATIONCOLLECTIONURI : " + tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI'));
+tl.debug("system.teamFoundationCollectionUri : " + tl.getVariable('system.teamFoundationCollectionUri'));
 
 tl.debug("gl : Selected Build Definition : " + tl.getInput('BuildDefinition'));
 
