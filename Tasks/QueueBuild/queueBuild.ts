@@ -38,7 +38,7 @@ export function parseParameters(map: string): { [tag: string]: string } {
 }
 
 var systemAccessToken = vstsApi.getSystemAccessToken(); //tl.getVariable('SYSTEM_ACCESSTOKEN')
-var systemUrl = vstsApi.getSystemEndpoint(); // tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI')
+var systemUrl =  tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI');
 
 tl.debug("system Url : " + systemUrl);
 tl.debug("SYSTEM_TEAMFOUNDATIONCOLLECTIONURI : " + tl.getVariable('SYSTEM_TEAMFOUNDATIONCOLLECTIONURI'));
